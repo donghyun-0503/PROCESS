@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="../reset.css">
+    <title>타자 게임</title>
+</head>
+<body>
+    <div id="card">
+        <h1 id="word">hello</h1>
+        <input id="input">
+        <button id="input-linked-button">단어 확인</button>
+        <h3 id="score">0</h3>
+    </div>
+    <script>
+        const word = document.querySelector("#word");
+        const wordInput = document.querySelector("#input");
+        const inputLinkedButton = document.querySelector("#input-linked-button");
+        const scoreElement = document.querySelector("#score");
+
+        let score = 0;
+        let currentWord = "";
+        const words = ["apple", "banana", "watermelon", "melon", "peach", "mango", "orange", "cherry", "pear", "pineapple", "blueberry"];
+
+        function render() {
+            scoreElement.textContent = score;
+            word.textContent = currentWord;
+        }
+
+        function randomWord() {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            currentWord = words[randomIndex];
+        }
+
+        function validateWord() {
+            if (wordInput.value !== currentWord) {
+                wordInput.value = "";
+                word.style.color = "red";
+                setTimeout(() => {
+                    word.style.color = "black";
+                }, 200);
+                return;
+            }
+
+            word.style.color = "green";
+            setTimeout(() => {
+                word.style.color = "black";
+            }, 200);
+            if (currentWord.length > 5) {
+                score += 2;
+            } else {
+                score++;
+            }
+            setTimeout(() => {
+                randomWord();
+                wordInput.value = "";
+                render();
+            }, 200);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            randomWord();
+            render();
+        });
+
+        wordInput.addEventListener("keypress", event => {
+            if (event.key !== "Enter") return;
+            validateWord();
+            render();
+        });
+
+        inputLinkedButton.addEventListener("click", () => {
+            validateWord();
+            word.textContent = currentWord;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="poketmon.css">
+    <link rel="stylesheet" href="../reset.css">
+    <title>포켓몬 도감</title>
+</head>
+<body>
+    <h1 id="title">포켓몬 도감</h1>
+    <label>
+        <input type="search" id="search-bar">
+        <button id="search-button">검색</button>
+    </label>
+    <div id="statusBox">
+        <div id="errorElement" class="dictionaryBox"></div>
+        <div id="idElement" class="dictionaryBox"></div>
+        <div id="nameElement" class="dictionaryBox"></div>
+        <img id="imgElement" class="dictionaryBox" alt="img">
+        <div id="typeElement" class="dictionaryBox"></div>
+        <div id="weightElement" class="dictionaryBox"></div>
+        <div id="heightElement" class="dictionaryBox"></div>
+        <div id="descElement" class="dictionaryBox"></div>
+    </div>
+
+    <script>
+        const statusBox = document.querySelector('#statusBox')
+        const errorElement = document.querySelector("#errorElement");
+        const searchBar = document.querySelector('#search-bar');
+        const searchButton = document.querySelector('#search-button');
+        const idElement = document.querySelector('#idElement');
+        const nameElement = document.querySelector('#nameElement');
+        const imgElement = document.querySelector('#imgElement');
+        const typeElement = document.querySelector('#typeElement');
+        const heightElement = document.querySelector('#heightElement');
+        const weightElement = document.querySelector('#weightElement');
+        const descElement = document.querySelector('#descElement');
+
+        async function searchPokemon() {
+            try {
+                if (searchBar.value === "피카츄") {
+                    const response = await fetch("https://pokemon-api.chaeyn.com/pokemon?name=피카츄");
+                    const data = await response.json();
+
+                    idElement.textContent = `도감 번호: ${data.id}`;
+                    nameElement.textContent = `이름: ${data.name}`;
+                    imgElement.src = data.image;
+                    imgElement.style.display = 'block';
+                    typeElement.textContent = `타입: ${data.types}`;
+                    heightElement.textContent = `키: ${data.height}`;
+                    weightElement.textContent = `몸무게: ${data.weight}`;
+                    descElement.textContent = `설명: ${data.description}`;
+                } else {
+                    statusBox.textContent = "다시 입력해주세요"
+                }
+
+            } catch (error) {
+                errorElement.innerText = "다시 검색해주세요";
+            }
+        }
+
+        searchButton.addEventListener("click", () => {
+            searchPokemon();
+        })
+
+        searchBar.addEventListener("keypress",event => {
+            if (event.key !== "Enter") return;
+            searchPokemon();
+        });
+    </script>
+</body>
+</html>

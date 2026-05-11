@@ -1,0 +1,28 @@
+#title {
+    font-size: 40px;
+    margin: 20px 0 0 20px;
+}
+
+#search-bar {
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    margin: 20px 0 0 20px;
+}
+
+#statusBox {
+    width: 500px;
+    height: 500px;
+    margin: 20px 0 0 20px;
+}
+
+.dictionaryBox {
+    width: 500px;
+    margin: 20px 0 0 20px;
+}
+
+#imgElement {
+    width: 200px;
+    height: 200px;
+    display: none;
+}
