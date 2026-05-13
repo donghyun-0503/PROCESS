@@ -50,6 +50,5 @@ body {
 }
 
 #input-linked-button:hover {
-    background-color: #75b8f8;
-    color: white;
+    background-color: #dddddd;
 }
