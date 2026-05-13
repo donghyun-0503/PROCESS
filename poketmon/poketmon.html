@@ -57,7 +57,7 @@
                 const data = await response.json();
 
                 const typeIcons = data.types.map(typeName => {
-                    return `<img src="${typeImages[typeName]}" alt="icon" width="30px" height="30px" />`;
+                    return `<img src="${typeImages[typeName]}" alt="icon" width="20px" height="20px" />`;
                 });
 
                 resultElement.innerHTML = "";
