@@ -35,7 +35,8 @@
             fighting: "./img/fighting.svg",
             ice: "./img/ice.svg",
             psychic: "./img/psychic.svg",
-            dragon: "./img/dragon.svg"
+            dragon: "./img/dragon.svg",
+            fairy: "./img/fairy.svg"
         };
 
 
@@ -57,7 +58,7 @@
                 const data = await response.json();
 
                 const typeIcons = data.types.map(typeName => {
-                    return `<img src="${typeImages[typeName]}" alt="icon" width="20px" height="20px" />`;
+                    return `<img src="${typeImages[typeName]}" alt="icon" width="20px" height="20px">`;
                 });
 
                 resultElement.innerHTML = "";
