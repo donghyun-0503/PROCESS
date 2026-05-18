@@ -31,3 +31,8 @@ body {
     width: 200px;
     height: 200px;
 }
+
+#typeText {
+    display: flex;
+    gap: 10px;
+}
