@@ -20,7 +20,11 @@ body {
 }
 
 .card {
-    margin: 20px;
+    width: 500px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 12px;
+    box-shadow: 2px 2px 3px #ccc;
 }
 
 #result {
@@ -34,5 +38,5 @@ body {
 
 #typeText {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
