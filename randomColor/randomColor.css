@@ -1,0 +1,115 @@
+@font-face {
+  font-family: "Escoredream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-1Thin.woff")
+    format("woff");
+  font-weight: 100;
+  font-display: swap;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  font-size: 4rem;
+  font-family: "Escoredream";
+}
+
+#search-button {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid black;
+  border-radius: 17px;
+  transition: all 100ms ease-out;
+}
+
+#search-button:hover {
+  background-color: #3e3e3e;
+  color: white;
+}
+
+#result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  flex-direction: column;
+}
+
+#resultColor {
+  display: flex;
+  gap: 16px;
+}
+
+#resultName {
+  width: 616px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#hexResult {
+  width: 300px;
+  height: 300px;
+  border-radius: 8px;
+}
+
+#RGBResult {
+  width: 300px;
+  height: 300px;
+  border-radius: 8px;
+}
+
+#hexResultName,
+#RGBResultName {
+  font-weight: normal;
+}
+
+#hexResultColor {
+  width: 100px;
+  height: 100px;
+}
+
+.button {
+  display: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid black;
+  border-radius: 17px;
+  margin-bottom: 15px;
+  transition: all 100ms ease-out;
+}
+
+#buttonBox {
+  width: 616px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button:hover {
+  background-color: #3e3e3e;
+  color: white;
+}
+
+#hexLockResult {
+  margin-left: 27px;
+  width: 550px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+#RGBLockResult {
+  margin-left: 27px;
+  width: 550px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}

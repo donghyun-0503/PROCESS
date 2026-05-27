@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="randomColor.css" />
+    <link rel="stylesheet" href="../reset.css" />
+    <title>palette</title>
+  </head>
+  <body>
+    <h1>palette</h1>
+    <button id="search-button">랜덤 색상</button>
+    <div id="result">
+      <div id="resultColor">
+        <div id="hexResult"></div>
+        <div id="RGBResult"></div>
+      </div>
+      <div id="resultName">
+        <h3 id="hexResultName"></h3>
+        <h3 id="RGBResultName"></h3>
+      </div>
+    </div>
+    <!--    <div id="buttonBox">-->
+    <!--      <button id="hex-lock-button" class="button">잠금</button>-->
+    <!--      <button id="RGB-lock-button" class="button">잠금</button>-->
+    <!--    </div>-->
+    <div id="hexLockResult"></div>
+    <div id="RGBLockResult"></div>
+    <script>
+      const button = document.querySelector("#search-button");
+      const hexResult = document.querySelector("#hexResult");
+      const resultName = document.querySelector("#hexResultName");
+      const RGBResult = document.querySelector("#RGBResult");
+      const RGBResultName = document.querySelector("#RGBResultName");
+      const hexLockResult = document.querySelector("#hexLockResult");
+      // const hexLockButton = document.querySelector("#hex-lock-button");
+      const RGBLockResult = document.querySelector("#RGBLockResult");
+      // const RGBLockButton = document.querySelector("#RGB-lock-button");
+      const hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
+      let result = "";
+      let result2 = [];
+      let currentHexColor = "";
+      let currentRGBColor = "";
+      let hexArr = [];
+      let RGBArr = [];
+
+      function render() {
+        hexResult.innerHTML = "";
+        result = "";
+        result2 = [];
+      }
+
+      function getHexRandomColor() {
+        render();
+        for (let i = 0; i < 6; i++) {
+          const randomHex = hex[Math.floor(Math.random() * hex.length)];
+          result += randomHex;
+        }
+        result = "#" + result;
+        hexResult.style.backgroundColor = result;
+        return result;
+      }
+
+      function getRGBRandomColor() {
+        render();
+        for (let i = 0; i < 3; i++) {
+          const randomRGB = Math.floor(Math.random() * 256);
+          result2.push(randomRGB);
+        }
+        const randomRGB = `rgb(${result2[0]}, ${result2[1]}, ${result2[2]})`;
+        RGBResult.style.backgroundColor = randomRGB;
+        return randomRGB;
+      }
+
+      function hexLock(hexNumber) {
+        const newHexLockBox = document.createElement("div");
+        if (!hexArr.includes(hexNumber)) {
+          newHexLockBox.style.width = "100px";
+          newHexLockBox.style.height = "100px";
+          newHexLockBox.style.backgroundColor = hexNumber;
+          newHexLockBox.style.display = "flex";
+          newHexLockBox.style.justifyContent = "center";
+          newHexLockBox.style.alignItems = "center";
+          newHexLockBox.style.color = "#e6e6e6";
+          newHexLockBox.style.borderRadius = "8px";
+          newHexLockBox.style.marginBottom = "5px";
+          newHexLockBox.innerHTML = hexNumber;
+          hexLockResult.appendChild(newHexLockBox);
+          hexArr.push(hexNumber);
+
+          newHexLockBox.addEventListener("click", () => {
+            newHexLockBox.style.display = "none";
+          });
+        }
+      }
+
+      function RGBLock(RGBNumber) {
+        const newRGBLockBox = document.createElement("div");
+        if (!RGBArr.includes(RGBNumber)) {
+          newRGBLockBox.style.width = "100px";
+          newRGBLockBox.style.height = "100px";
+          newRGBLockBox.style.backgroundColor = RGBNumber;
+          newRGBLockBox.style.display = "flex";
+          newRGBLockBox.style.justifyContent = "center";
+          newRGBLockBox.style.alignItems = "center";
+          newRGBLockBox.style.color = "#e6e6e6";
+          newRGBLockBox.style.fontSize = "12px";
+          newRGBLockBox.style.borderRadius = "8px";
+          newRGBLockBox.style.marginBottom = "5px";
+          newRGBLockBox.innerHTML = RGBNumber;
+          newRGBLockBox.style.backgroundColor = RGBNumber;
+          RGBLockResult.appendChild(newRGBLockBox);
+          RGBArr.push(RGBNumber);
+
+          newRGBLockBox.addEventListener("click", () => {
+            newRGBLockBox.style.display = "none";
+          });
+        }
+      }
+
+      button.addEventListener("click", () => {
+        // hexLockButton.style.display = "block";
+        // RGBLockButton.style.display = "block";
+
+        currentHexColor = getHexRandomColor();
+        resultName.innerHTML = currentHexColor;
+        currentRGBColor = getRGBRandomColor();
+        RGBResultName.innerHTML = currentRGBColor;
+      });
+
+      hexResult.addEventListener("click", () => {
+        hexLock(currentHexColor);
+      });
+
+      RGBResult.addEventListener("click", () => {
+        RGBLock(currentRGBColor);
+      });
+    </script>
+  </body>
+</html>
