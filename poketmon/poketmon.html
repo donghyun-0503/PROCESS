@@ -1,70 +1,71 @@
 <!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="poketmon.css">
-    <link rel="stylesheet" href="../reset.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="poketmon.css" />
+    <link rel="stylesheet" href="../reset.css" />
     <title>포켓몬 도감</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1 id="title">포켓몬 도감</h1>
     <label>
-        <input type="search" id="search-bar">
-        <button id="search-button">검색</button>
+      <input type="search" id="search-bar" />
+      <button id="search-button">검색</button>
     </label>
 
     <div id="result"></div>
 
     <script>
-        const searchBar = document.querySelector('#search-bar');
-        const searchButton = document.querySelector('#search-button');
-        const inputElement = document.querySelector('#search-bar');
-        const resultElement = document.querySelector('#result');
-        const typeImages = {
-            grass: "./img/grass.png",
-            poison: "./img/poison.svg",
-            fire: "./img/fire.svg",
-            water: "./img/water.svg",
-            electric: "./img/electric.svg",
-            normal: "./img/normal.svg",
-            bug: "./img/bug.svg",
-            flying: "./img/flying.svg",
-            fighting: "./img/fighting.svg",
-            ice: "./img/ice.svg",
-            psychic: "./img/psychic.svg",
-            dragon: "./img/dragon.svg",
-            fairy: "./img/fairy.svg"
-        };
+      const searchBar = document.querySelector("#search-bar");
+      const searchButton = document.querySelector("#search-button");
+      const inputElement = document.querySelector("#search-bar");
+      const resultElement = document.querySelector("#result");
+      const typeImages = {
+        grass: "./img/grass.png",
+        poison: "./img/poison.svg",
+        fire: "./img/fire.svg",
+        water: "./img/water.svg",
+        electric: "./img/electric.svg",
+        normal: "./img/normal.svg",
+        bug: "./img/bug.svg",
+        flying: "./img/flying.svg",
+        fighting: "./img/fighting.svg",
+        ice: "./img/ice.svg",
+        psychic: "./img/psychic.svg",
+        dragon: "./img/dragon.svg",
+        fairy: "./img/fairy.svg",
+      };
 
+      const image = document.createElement("img");
+      document.body.appendChild(image);
 
-        const image = document.createElement("img");
-        document.body.appendChild(image);
+      async function searchPokemon() {
+        resultElement.innerHTML = "";
 
-        async function searchPokemon() {
-            resultElement.innerHTML = "";
+        const value = inputElement.value;
+        const card = document.createElement("div");
+        resultElement.innerHTML = "로딩중...";
 
-            const value = inputElement.value;
-            const card = document.createElement("div");
-            resultElement.innerHTML = "로딩중...";
+        try {
+          const response = await fetch(`https://pokemon-api.chaeyn.com/pokemon?name=${value}`);
 
-            try {
-                const response = await fetch(`https://pokemon-api.chaeyn.com/pokemon?name=${value}`);
+          if (!response.ok) throw new Error("포켓몬 정보를 찾을 수 없습니다.");
 
-                if (!response.ok) throw new Error("포켓몬 정보를 찾을 수 없습니다.");
+          const data = await response.json();
 
-                const data = await response.json();
+          const typeIcons = data.types.map(typeName => {
+            return `<img src="${typeImages[typeName]}" alt="icon" width="20px" height="20px">`;
+          });
 
-                const typeIcons = data.types.map(typeName => {
-                    return `<img src="${typeImages[typeName]}" alt="icon" width="20px" height="20px">`;
-                });
+          resultElement.innerHTML = "";
+          card.classList.add("card");
 
-                resultElement.innerHTML = "";
-                card.classList.add("card");
-
-                card.innerHTML = `
+          card.innerHTML = `
                     도감 번호: ${data.id}<br>
                     이름: ${data.name}<br>
                     <img src="${data.image}" alt="img" id="img"><br>
@@ -73,22 +74,22 @@
                     </div>
                     키: ${data.height}<br>
                     몸무게: ${data.weight}<br>
-                    설명: ${data.description}`
+                    설명: ${data.description}`;
 
-                resultElement.appendChild(card);
-            } catch (error) {
-                resultElement.innerHTML = "다시 검색해주세요";
-            }
+          resultElement.appendChild(card);
+        } catch (error) {
+          resultElement.innerHTML = "다시 검색해주세요";
         }
+      }
 
-        searchButton.addEventListener("click", () => {
-            searchPokemon();
-        });
+      searchButton.addEventListener("click", () => {
+        searchPokemon();
+      });
 
-        searchBar.addEventListener("keypress",event => {
-            if (event.key !== "Enter") return;
-            searchPokemon();
-        });
+      searchBar.addEventListener("keypress", event => {
+        if (event.key !== "Enter") return;
+        searchPokemon();
+      });
     </script>
-</body>
+  </body>
 </html>
