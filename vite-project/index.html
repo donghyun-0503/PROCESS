@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="../reset.css" />
+    <title>나만의 블로그</title>
+  </head>
+  <body>
+    <header>
+      <h3 id="logo"><img src="/src/assets/vite.svg" alt="" /></h3>
+      <h1 id="main-title">나만의 블로그</h1>
+      <label for="search"></label>
+      <input id="search" type="text" placeholder="검색" autofocus required />
+      <p id="writing">새 글쓰기</p>
+      <p id="profile">내 프로필</p>
+    </header>
+
+    <div id="writing-box">
+      <input type="text" id="title-input" placeholder="제목을 입력하세요" />
+      <textarea id="content-input" placeholder="내용을 입력하세요"></textarea>
+    </div>
+
+    <div id="buttons">
+      <button id="confirm-button">완료</button>
+      <button id="edit-button">수정</button>
+      <button id="delete-button">삭제</button>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
