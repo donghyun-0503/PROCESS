@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../reset.css" />
+    <link rel="stylesheet" href="weather.css" />
+    <title>날씨</title>
+  </head>
+  <body>
+    <h1>날씨</h1>
+    <label for="city">도시 이름</label>
+    <input id="city" type="text" autofocus required />
+    <button id="search-button">검색</button>
+    <div id="result">
+      <div id="city-name"></div>
+      <div id="weather-info"></div>
+    </div>
+    <script>
+      const city = document.querySelector("#city");
+      const searchButton = document.querySelector("#search-button");
+      const cityName = document.querySelector("#city-name");
+      const weatherInfo = document.querySelector("#weather-info");
+
+      async function searchWeather() {
+        cityName.innerHTML = "";
+        weatherInfo.innerHTML = "";
+
+        const value = city.value;
+        cityName.innerHTML = "로딩중...";
+
+        try {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=c2cbc7ba1635fb793feba7b9a6109f57&units=metric&lang=kr`
+          );
+
+          // if (!response.name) throw new Error("날씨 정보를 찾을 수 없습니다.");
+
+          const data = await response.json();
+
+          cityName.innerHTML = `
+            <h3 id="name">${data.name}</h3>
+            <div id="lon-lat">
+                <p id="lon">${data.coord.lon}</p> <p id="lat">${data.coord.lat}</p>
+            </div>`;
+
+          weatherInfo.innerHTML = `
+            <p id="temp">${data.main.temp}°C</p>
+            <div id="desc">
+              <p>체감 온도 : ${data.main.feels_like}°C</p>
+              <p>풍속 : ${data.wind.speed}m/s</p>
+              <p>습도 : ${data.main.humidity}%</p>
+            </div>`;
+        } catch (error) {
+          cityName.innerHTML = `다시 입력해주세요`;
+        }
+      }
+
+      searchButton.addEventListener("click", () => {
+        searchWeather();
+      });
+
+      city.addEventListener("keypress", event => {
+        if (event.key !== "Enter") return;
+        searchWeather();
+      });
+    </script>
+  </body>
+</html>
