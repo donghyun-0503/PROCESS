@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../reset.css" />
+    <link rel="stylesheet" href="../vite-project/src/login.css" />
+    <title>로그인 페이지</title>
+  </head>
+  <body>
+    <div id="loginBox">
+      <form>
+        <fieldset id="loginForm">
+          <h3 id="loginTitle">로그인</h3>
+          <label for="id"></label>
+          <input id="id" type="text" placeholder=" 아이디" autofocus required />
+
+          <label for="pw"></label>
+          <input id="pw" type="password" placeholder=" 비밀번호" required />
+
+          <div id="function">
+            <p id="signUp">회원가입</p>
+            <p id="missingId">아이디 찾기</p>
+            <p id="missingPassword">비밀번호 찾기</p>
+          </div>
+
+          <button id="loginButton">로그인 하기</button>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>
