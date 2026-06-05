@@ -2,9 +2,9 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../reset.css" />
-    <link rel="stylesheet" href="../vite-project/src/login.css" />
+    <link rel="stylesheet" href="/src/login.css" />
     <title>로그인 페이지</title>
   </head>
   <body>
@@ -19,14 +19,15 @@
           <input id="pw" type="password" placeholder=" 비밀번호" required />
 
           <div id="function">
-            <p id="signUp">회원가입</p>
+            <a href="signUp.html"><p id="signUp">회원가입</p></a>
             <p id="missingId">아이디 찾기</p>
             <p id="missingPassword">비밀번호 찾기</p>
           </div>
 
-          <button id="loginButton">로그인 하기</button>
+          <a href="index.html"><button id="loginButton">로그인 하기</button></a>
         </fieldset>
       </form>
     </div>
+    <script type="module" src="/src/login.js"></script>
   </body>
 </html>

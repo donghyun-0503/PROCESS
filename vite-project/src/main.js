@@ -4,7 +4,7 @@ const confirmButton = document.querySelector("#confirm-button");
 const deleteButton = document.querySelector("#delete-button");
 const titleInput = document.querySelector("#title-input");
 const contentInput = document.querySelector("#content-input");
-let editTargetId = null;
+let editTarget = null;
 
 function getPosts() {
   let savedPosts = localStorage.getItem("sns_posts");
@@ -42,6 +42,12 @@ function renderPosts() {
     const postTitle = document.createElement("h3");
     postTitle.textContent = post.title;
 
+    const postAuthor = document.createElement("p");
+    postAuthor.textContent = `작성자: ${post.author}`;
+    postAuthor.style.fontSize = "14px";
+    postAuthor.style.color = "gray";
+    postAuthor.style.marginBottom = "15px";
+
     const postText = document.createElement("p");
     postText.textContent = post.content;
 
@@ -58,6 +64,7 @@ function renderPosts() {
     });
 
     postCard.append(postTitle);
+    postCard.append(postAuthor);
     postCard.append(postText);
     postCard.append(editBtn);
     postCard.append(delBtn);
@@ -69,21 +76,24 @@ export function addPost() {
   const title = titleInput.value;
   const content = contentInput.value;
 
+  const currentUser = localStorage.getItem("currentUser") || "익명";
+
   let posts = getPosts();
 
-  if (editTargetId) {
+  if (editTarget) {
     posts = posts.map(post => {
-      if (post.id === editTargetId) {
+      if (post.id === editTarget) {
         return { ...post, title: title, content: content };
       }
       return post;
     });
-    editTargetId = null;
+    editTarget = null;
   } else {
     const newPost = {
       id: Date.now(),
       title: title,
       content: content,
+      author: currentUser,
     };
     posts.push(newPost);
   }
@@ -100,7 +110,7 @@ export function editPost(id, title, content) {
   writingNew();
   titleInput.value = title;
   contentInput.value = content;
-  editTargetId = id;
+  editTarget = id;
 }
 
 export function deletePost(id) {
@@ -122,7 +132,7 @@ export function del() {
   confirmButton.style.display = "none";
   titleInput.value = "";
   contentInput.value = "";
-  editTargetId = null;
+  editTarget = null;
 }
 
 writing.addEventListener("click", () => {
