@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/vite.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/src/signUp.css" />
+    <title>회원가입</title>
+  </head>
+  <body>
+    <div id="signUpBox">
+      <form id="formTag">
+        <fieldset id="signUpForm">
+          <h3 id="signUpTitle">회원가입</h3>
+          <label for="name"></label>
+          <input id="name" type="text" placeholder=" 이름" required />
+
+          <label for="id"></label>
+          <input id="id" type="text" placeholder=" 아이디" autofocus required />
+
+          <label for="pw"></label>
+          <input id="pw" type="password" placeholder=" 비밀번호" required />
+
+          <button type="submit" id="signUpButton">회원가입하기</button>
+        </fieldset>
+      </form>
+    </div>
+    <script type="module" src="/src/signUp.js"></script>
+  </body>
+</html>
