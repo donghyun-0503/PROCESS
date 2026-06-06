@@ -46,7 +46,7 @@ function renderPosts() {
     postAuthor.textContent = `작성자: ${post.author}`;
     postAuthor.style.fontSize = "14px";
     postAuthor.style.color = "gray";
-    postAuthor.style.marginBottom = "15px";
+    postAuthor.style.marginBottom = "14px";
 
     const postText = document.createElement("p");
     postText.textContent = post.content;

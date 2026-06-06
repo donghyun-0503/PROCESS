@@ -13,7 +13,7 @@ loginButton.addEventListener("click", e => {
   const userConfig = userList.find(user => user.userId === idInput && user.password === pwInput);
 
   if (userConfig) {
-    alert(`${userConfig.username}님, 환영합니다! 로그인 성공!`);
+    alert(`${userConfig.username}님, 환영합니다`);
     localStorage.setItem("currentUser", userConfig.username);
     window.location.href = "/vite-project/index.html";
   } else {
