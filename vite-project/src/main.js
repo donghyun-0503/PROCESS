@@ -76,6 +76,7 @@ export function addPost() {
   const title = titleInput.value;
   const content = contentInput.value;
 
+  // 현재 로그인한 사람 이름 가져오기
   const currentUser = localStorage.getItem("currentUser") || "익명";
 
   let posts = getPosts();
