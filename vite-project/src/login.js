@@ -15,7 +15,7 @@ loginButton.addEventListener("click", e => {
   if (userConfig) {
     alert(`${userConfig.username}님, 환영합니다`);
     localStorage.setItem("currentUser", userConfig.username);
-    window.location.href = "/vite-project/index.html";
+    window.location.href = "index.html";
   } else {
     alert("아이디 또는 비밀번호가 일치하지 않습니다.");
   }

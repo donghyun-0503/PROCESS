@@ -42,5 +42,5 @@ formTag.addEventListener("submit", e => {
   alert("회원 가입 완료");
   formTag.reset();
 
-  window.location.href = "/vite-project/login.html";
+  window.location.href = "/login.html";
 });
