@@ -106,7 +106,8 @@ button {
   padding: 8px 15px;
   cursor: pointer;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #cdcdcd;
+  color: #3e3e3e;
   font-family: "Escoredream";
   font-size: 15px;
   margin-right: 10px;
