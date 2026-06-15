@@ -4,6 +4,7 @@ const confirmButton = document.querySelector("#confirm-button");
 const deleteButton = document.querySelector("#delete-button");
 const titleInput = document.querySelector("#title-input");
 const contentInput = document.querySelector("#content-input");
+const deleteUserBtn = document.querySelector("#delete-user");
 let editTarget = null;
 
 function getPosts() {
@@ -43,10 +44,10 @@ function renderPosts() {
     postTitle.textContent = post.title;
 
     const postAuthor = document.createElement("p");
-    postAuthor.textContent = `작성자: ${post.author}`;
+    postAuthor.textContent = `작성자: ${post.author || "익명"}`;
     postAuthor.style.fontSize = "14px";
     postAuthor.style.color = "gray";
-    postAuthor.style.marginBottom = "14px";
+    postAuthor.style.marginBottom = "15px";
 
     const postText = document.createElement("p");
     postText.textContent = post.content;
@@ -76,7 +77,6 @@ export function addPost() {
   const title = titleInput.value;
   const content = contentInput.value;
 
-  // 현재 로그인한 사람 이름 가져오기
   const currentUser = localStorage.getItem("currentUser") || "익명";
 
   let posts = getPosts();
@@ -136,6 +136,33 @@ export function del() {
   editTarget = null;
 }
 
+export function deleteAccount() {
+  const currentUser = localStorage.getItem("currentUser");
+
+  if (!currentUser || currentUser === "익명") {
+    alert("로그인 상태가 아닙니다.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (confirm("정말로 탈퇴하시겠습니까? 작성한 모든 글도 삭제됩니다.")) {
+    const savedUsers = localStorage.getItem("userList");
+    let userList = savedUsers ? JSON.parse(savedUsers) : [];
+
+    userList = userList.filter(user => user.username !== currentUser);
+    localStorage.setItem("userList", JSON.stringify(userList));
+
+    let posts = getPosts();
+    posts = posts.filter(post => post.author !== currentUser);
+    savePosts(posts);
+
+    localStorage.removeItem("currentUser");
+
+    alert("회원 탈퇴가 완료되었습니다.");
+    window.location.href = "login.html";
+  }
+}
+
 writing.addEventListener("click", () => {
   writingNew();
 });
@@ -152,6 +179,10 @@ contentInput.addEventListener("keypress", event => {
   if (event.key === "Enter") {
     addPost();
   }
+});
+
+deleteUserBtn.addEventListener("click", () => {
+  deleteAccount();
 });
 
 renderPosts();

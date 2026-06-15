@@ -9,7 +9,6 @@ loginButton.addEventListener("click", e => {
   const savedData = localStorage.getItem("userList");
   const userList = savedData ? JSON.parse(savedData) : [];
 
-  // 배열 안에서 아이디와 비밀번호가 모두 일치하는 사람 찾기
   const userConfig = userList.find(user => user.userId === idInput && user.password === pwInput);
 
   if (userConfig) {
