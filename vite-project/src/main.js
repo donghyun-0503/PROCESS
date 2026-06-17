@@ -175,8 +175,14 @@ confirmButton.addEventListener("click", () => {
   addPost();
 });
 
-contentInput.addEventListener("keypress", event => {
-  if (event.key === "Enter") {
+titleInput.addEventListener("keypress", e => {
+  if (e.key === "Enter") {
+    addPost();
+  }
+});
+
+contentInput.addEventListener("keypress", e => {
+  if (e.key === "Enter") {
     addPost();
   }
 });
