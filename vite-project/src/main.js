@@ -136,6 +136,7 @@ export function del() {
   editTarget = null;
 }
 
+//삭제기능
 export function deleteAccount() {
   const currentUser = localStorage.getItem("currentUser");
 
