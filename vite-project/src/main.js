@@ -6,19 +6,17 @@ const titleInput = document.querySelector("#title-input");
 const contentInput = document.querySelector("#content-input");
 const deleteUserBtn = document.querySelector("#delete-user");
 let editTarget = null;
+let data = [];
 
-function getPosts() {
-  let savedPosts = localStorage.getItem("sns_posts");
+async function getPosts() {
+  try {
+    const response = await fetch("https://post-api.chaeyn.com/api/posts");
 
-  if (savedPosts) {
-    return JSON.parse(savedPosts);
-  } else {
-    return [];
+    data = await response.json();
+    renderPosts();
+  } catch (error) {
+    console.error(error);
   }
-}
-
-function savePosts(posts) {
-  localStorage.setItem("sns_posts", JSON.stringify(posts));
 }
 
 function createBoardArea() {
@@ -35,16 +33,14 @@ function renderPosts() {
   const board = createBoardArea();
   board.innerHTML = "";
 
-  const posts = getPosts();
-
-  posts.forEach(post => {
+  data.forEach(post => {
     const postCard = document.createElement("div");
 
     const postTitle = document.createElement("h3");
     postTitle.textContent = post.title;
 
     const postAuthor = document.createElement("p");
-    postAuthor.textContent = `작성자: ${post.author || "익명"}`;
+    postAuthor.textContent = `작성자: ${post.authorEmail || "익명"}`;
     postAuthor.style.fontSize = "14px";
     postAuthor.style.color = "gray";
     postAuthor.style.marginBottom = "15px";
@@ -74,15 +70,17 @@ function renderPosts() {
 }
 
 export function addPost() {
-  const title = titleInput.value;
-  const content = contentInput.value;
-
+  const title = titleInput.value.trim();
+  const content = contentInput.value.trim();
   const currentUser = localStorage.getItem("currentUser") || "익명";
 
-  let posts = getPosts();
+  if (!title || !content) {
+    alert("제목과 내용을 입력해주세요.");
+    return;
+  }
 
   if (editTarget) {
-    posts = posts.map(post => {
+    data = data.map(post => {
       if (post.id === editTarget) {
         return { ...post, title: title, content: content };
       }
@@ -96,14 +94,10 @@ export function addPost() {
       content: content,
       author: currentUser,
     };
-    posts.push(newPost);
+    data.push(newPost);
   }
 
-  savePosts(posts);
   renderPosts();
-
-  titleInput.value = "";
-  contentInput.value = "";
   del();
 }
 
@@ -115,9 +109,7 @@ export function editPost(id, title, content) {
 }
 
 export function deletePost(id) {
-  let posts = getPosts();
-  posts = posts.filter(post => post.id !== id);
-  savePosts(posts);
+  data = data.filter(post => post.id !== id);
   renderPosts();
 }
 
@@ -136,7 +128,6 @@ export function del() {
   editTarget = null;
 }
 
-//삭제기능
 export function deleteAccount() {
   const currentUser = localStorage.getItem("currentUser");
 
@@ -146,16 +137,12 @@ export function deleteAccount() {
     return;
   }
 
-  if (confirm("정말로 탈퇴하시겠습니까? 작성한 모든 글도 삭제됩니다.")) {
+  if (confirm("정말로 탈퇴하시겠습니까?")) {
     const savedUsers = localStorage.getItem("userList");
     let userList = savedUsers ? JSON.parse(savedUsers) : [];
 
     userList = userList.filter(user => user.username !== currentUser);
     localStorage.setItem("userList", JSON.stringify(userList));
-
-    let posts = getPosts();
-    posts = posts.filter(post => post.author !== currentUser);
-    savePosts(posts);
 
     localStorage.removeItem("currentUser");
 
@@ -176,20 +163,8 @@ confirmButton.addEventListener("click", () => {
   addPost();
 });
 
-titleInput.addEventListener("keypress", e => {
-  if (e.key === "Enter") {
-    addPost();
-  }
-});
-
-contentInput.addEventListener("keypress", e => {
-  if (e.key === "Enter") {
-    addPost();
-  }
-});
-
 deleteUserBtn.addEventListener("click", () => {
   deleteAccount();
 });
 
-renderPosts();
+getPosts();
