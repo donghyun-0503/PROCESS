@@ -6,7 +6,7 @@ const titleInput = document.querySelector("#title-input");
 const contentInput = document.querySelector("#content-input");
 const deleteUserBtn = document.querySelector("#delete-user");
 let editTarget = null;
-let data = [];
+let data;
 
 async function getPosts() {
   try {
