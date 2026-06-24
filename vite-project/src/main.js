@@ -167,4 +167,6 @@ deleteUserBtn.addEventListener("click", () => {
   deleteAccount();
 });
 
-getPosts();
+(async () => {
+  await getPosts();
+})();
