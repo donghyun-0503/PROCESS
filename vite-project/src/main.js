@@ -15,7 +15,7 @@ async function getPosts() {
     data = await response.json();
     renderPosts();
   } catch (error) {
-    console.error(error);
+    console.error("에러 발생" + error);
   }
 }
 
