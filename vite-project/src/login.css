@@ -15,7 +15,7 @@
 body {
   text-align: center;
   background-color: #f6f6f6;
-  font-family: "Escoredream";
+  font-family: "Escoredream", sans-serif;
 }
 
 #loginBox {
@@ -48,7 +48,7 @@ form {
 #loginTitle {
   font-size: 25px;
   margin-bottom: 30px;
-  font-family: "Escoredream";
+  font-family: "Escoredream", sans-serif;
 }
 
 #id,
