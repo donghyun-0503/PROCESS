@@ -75,7 +75,7 @@ export function addPost() {
   const currentUser = localStorage.getItem("currentUser") || "익명";
 
   if (!title || !content) {
-    alert("제목과 내용을 입력해주세요.");
+    alert("제목과 내용을 입력해주세요");
     return;
   }
 
