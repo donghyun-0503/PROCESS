@@ -38,7 +38,7 @@
             `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=c2cbc7ba1635fb793feba7b9a6109f57&units=metric&lang=kr`
           );
 
-          // if (!response.name) throw new Error("날씨 정보를 찾을 수 없습니다.");
+          if (!response.name) throw new Error("날씨 정보를 찾을 수 없습니다.");
 
           const data = await response.json();
 
