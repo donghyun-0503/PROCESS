@@ -132,7 +132,7 @@ export function deleteAccount() {
   const currentUser = localStorage.getItem("currentUser");
 
   if (!currentUser || currentUser === "익명") {
-    alert("로그인 상태가 아닙니다.");
+    alert("로그인 상태가 아닙니다");
     window.location.href = "login.html";
     return;
   }
